@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es-AR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>html2canvas demo</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding-top: 20px;
+}
+
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+}
+
+.header h1 {
+  font-size: 40px;
+}
+
+.header small {
+  text-transform: uppercase;
+}
+
+.navbar {
+  background-color: #333;
+  width: 100%;
+  display: block;
+  padding: 10px;
+  text-align: center;
+}
+
+.navbar a {
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.row {
+  margin: 0 auto;
+  width: 50%;
+}
+</style>
+</head>
+  <body>
+    <div class="row">
+      <div class="header">
+        <h1>html2canvas</h1>
+        <p>Esta página es un <strong>demo</strong> para capturar la pantalla con <strong>JavaScript</strong>.</p>
+        <small>Nota: Desactivar las ventanas emergentes de su navegador.</small>
+      </div><!-- .header -->
+
+      <div class="navbar">
+        <a href="https://html2canvas.hertzen.com/" class="active">Documentación Oficial</a>
+        <a href="https://felixbarros.blog" class="right">FelixBarros.Blog</a>
+      </div>
+    </div><!-- .row -->
+      
+  <script src="js/html2canvas.min.js"></script>
+
+  <script>
+  html2canvas(document.body).then(canvas => {
+    const contentType = 'image/jpeg';
+    const base64ImageData = canvas.toDataURL(contentType);
+    const image = new Image();
+    const w = window.open("", "_blank");
+    
+    image.src = base64ImageData;
+    w.document.write(image.outerHTML);
+  });
+  </script>
+
+  </body>
+</html>
