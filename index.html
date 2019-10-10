@@ -97,28 +97,36 @@ body {
 
   <script>
     function randomDelay() {
-        return Math.floor(1000 * Math.random())
+      var random = Math.floor(1000 * Math.random());
+      $('#random').text(random);
     }
-    setTimeout(() => {
-      $('#random').text(randomDelay());
-    }, 2000);
-  
-  $('#screenshotModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var modal = $(this)
-    var body = modal.find('.modal-body');
 
-    // Capturar pantalla
-    html2canvas(document.body).then(function(canvas) {
-      const contentType = 'image/jpeg';
-      const base64ImageData = canvas.toDataURL(contentType);
-      const image = new Image();
-      
-      image.src = base64ImageData;
-      body.html(image.outerHTML);
-      body.find('img').addClass('img-fluid');
+    setTimeout(() => {
+      randomDelay();
+    }, 1800);
+
+    var idModal = '#screenshotModal';
+    $(idModal).on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      var modal = $(this)
+      var body = modal.find('.modal-body');
+
+      // Capturar pantalla
+      html2canvas(document.body).then(function(canvas) {
+        const contentType = 'image/jpeg';
+        const base64ImageData = canvas.toDataURL(contentType);
+        const image = new Image();
+        
+        image.src = base64ImageData;
+        body.html(image.outerHTML);
+        body.find('img').addClass('img-fluid');
+      });
     });
-  })
+
+    // Generamos un nuevo número aleatorio al cerrar el modal
+    $(idModal).on('hidden.bs.modal', function(event) {
+      randomDelay();
+    });
   </script>
 
   </body>
